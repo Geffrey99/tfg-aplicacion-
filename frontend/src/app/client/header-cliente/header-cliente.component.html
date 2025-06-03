@@ -1,0 +1,71 @@
+
+<nav class="navbar navbar-expand-md bg-body-tertiary">
+    <div class="container-xl">
+      <a class="navbar-brand" routerLink="/app-user">
+        <img class="logo" src="assets/img/logoO.png" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="/app-user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">todocu€$ta</a>
+          </li>
+          <li class="nav-item" *ngFor="let category of categories">
+            <a class="nav-link" aria-current="page"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/app-user/category', category.name]">{{ category.name }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page"  routerLink="/app-user/mis-pedidos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Mis pedidos</a>
+          </li>
+        </ul>
+        <div class="search-and-icons">
+          <form class="d-flex mb-2 me-2" role="search">
+            <input class="form-control me-2" type="search" aria-label="Search">
+          </form>
+          <div class="user-icons d-flex mb-2">
+            <!-- <div class="profile" routerLink="/iniciar-sesion" ><i class="bi bi-person"></i></div> -->
+            <!-- <div><button class="profile" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Conectado</button> </div> -->
+            <div><button class="profile" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <i class="bi bi-person"></i></button> </div>
+            <div class="wishlist"><i class="bi bi-heart"></i></div>
+            <div class="cart" class="nav-link"  routerLink="/app-user/cart"routerLinkActive="active"><i class="bi bi-cart3"></i></div>
+          </div>
+        </div>
+        <div class="contact-info d-md-flex">
+          <p>+0987654321 | +1234567890 </p>
+          <p><a href="mailto:">gzcomercioonline.com</a></p>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+<!----Datos del usuario -->
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header bg-dark text-white">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Mi cuenta</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body bg-light">
+    <div *ngIf="!userLoginOn" class="text-center">
+      <p class="lead">Por favor inicia sesión para continuar</p>
+      <a class="btn btn-success" href="/iniciar-sesion">Iniciar sesión</a>
+    </div>
+    <div *ngIf="userLoginOn">
+      <h3 class="text-success fw-bold">Bienvenido, {{userData?.rol || 'Cliente'}} - {{userData?.id}}</h3>
+      <div class="user-info">
+        <p><strong>Nombre:</strong> {{ userData?.nombre }}</p>
+        <p><strong>Apellido:</strong> {{ userData?.apellido }}</p>
+        <p><strong>Email:</strong> {{ userData?.email }}</p>
+      </div>
+      <div class="d-grid gap-2">
+        <a class="btn btn-outline-danger" (click)="logout()">Cerrar sesión</a>
+        <a class="btn btn-outline-primary" (click)="userData?.id ? editarMisDatos(userData?.id) : null">Mis Datos</a>
+        <a class="btn btn-outline-secondary" (click)="userData?.id ? eliminar(userData?.id) : null">Eliminar cuenta</a>  <!--SOLO SI NO! TIENE PEDIDOS PENDIENTES O EN PROCESO DE ENVIO !  -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
