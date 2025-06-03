@@ -26,33 +26,8 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    //TODO //Permitir por roles ADMIN O USER PERO MUCHAS RUTAS...Y ME DA MUCHO PROBLEMA
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .csrf(csrf -> csrf.disable()) // Desactiva CSRF
-//                .cors(cors -> {}) // Configura CORS (debe estar definido con un CorsFilter si es necesario)
-//                .sessionManagement(session ->
-//                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Desactiva sesiones
-//                )
-//
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/login", "register", "/encriptar-contra",
-//                                "/api/usuario/**").permitAll() // Permitir acceso a rutas sin autenticación
-//                        // Rutas habilitadas solo para usuarios con el rol ADMIN
-//                        .requestMatchers("/api/products/**", "/api/products/create").hasAuthority("ROLE_Admin")
-//
-//
-//                        // Rutas habilitadas solo para usuarios con el rol USER
-//                        .requestMatchers("/app-user/**", "/api/usuario/**", "/api/categories/**", "/api/products/**","/api/categories").hasRole("User") // USER y ADMIN
-//
-//
-//                        .anyRequest().authenticated() // El resto requiere autenticación
-//
-//                )
-//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // ← ¡AQUÍ!
-//        return http.build();
-//    }
+    //TODO //Permitir por roles ADMIN O USER PERO MUCHAS RUTAS...Y ME DA MUCHO PROBLEMA--
+    //TODO SE HARA CON TIEMPO
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -74,7 +49,8 @@ public class SecurityConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); // Dirección del frontend
+        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "https://localhost",          // Para Capacitor o pruebas con live reload
+                "https://hhreformas.es", "https://geffrrey.com", "http://geffrrey.com"  )); // Dirección del frontend_ DOMINIO que tenia creado ---reutilizado aqui
         corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization"));
         corsConfiguration.setExposedHeaders(Arrays.asList("Authorization"));
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));

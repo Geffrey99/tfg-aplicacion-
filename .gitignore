@@ -9,6 +9,7 @@
    # Ignorar archivos y carpetas del frontend/backend
 frontend/node_modules/
 backend/target/
+frontend/dist/
 
    # Archivos configuraciones que no se deben incluir
 *.env
