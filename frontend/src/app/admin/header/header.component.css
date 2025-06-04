@@ -3,7 +3,7 @@
     background: -webkit-linear-gradient( #00ff80 , #36272f);
   }
 .logo {
-  transform: scale(1.8); /* Aumenta el tamaño un 20% */
+  transform: scale(1); /* Aumenta el tamaño un 20% */
 }
   .navbar .navbar-brand img {
     max-width: 100px;

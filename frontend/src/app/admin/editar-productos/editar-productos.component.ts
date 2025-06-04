@@ -23,7 +23,7 @@ categories = [
   { id: 1, name: 'Móviles' },
   { id: 2, name: 'Portátiles' },
   { id: 3, name: 'Accesorios' }
-  // ... puedes agregar más categorías aquí
+  // ... se puede agregar más categorías aquí
 ];
 
 private imageBaseUrl = 'https://hhreformas.es/api/product-images/';
@@ -47,7 +47,7 @@ ngOnInit(): void {
     stock: ['', [Validators.required, Validators.min(1)]],
     photoPath: [''],
     category: this.fb.group({
-      id: ['', Validators.required] // Asegúrate de que 'id' sea un campo dentro de un FormGroup para 'category'
+      id: ['', Validators.required] // Aseegura de que 'id' sea un campo dentro de un FormGroup para 'category' Okkk
     }),
   });
 
