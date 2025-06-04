@@ -257,7 +257,13 @@ import jakarta.transaction.Transactional;
             Optional<Product> productOptional = productRepository.findById(id);
             if (productOptional.isPresent()) {
                 Product product = productOptional.get();
-                if (product.getStock() > 2) {
+                //Si el producto tiene stock 0, eliminar directamente
+                if (product.getStock() == 0) {
+                    productRepository.delete(product);
+                    return ResponseEntity.ok().body("\"{\\\"message\\\":\\\"Producto eliminado con éxito (stock 0).\\\"}\"");
+                }
+                //Si el producto es mayor a 1, no eliminar
+                if (product.getStock() > 1) {
                     return ResponseEntity.badRequest().body("{\"message\":\"No se puede eliminar el producto porque aún tiene stock.\"}");
                 } else {
                     // Verificar si hay detalles de pedido que referencian este producto
