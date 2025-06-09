@@ -1,18 +1,39 @@
 .overflow-auto {
-    overflow-y: auto;
-    height: 500px;
-  }
-  
-  .flex-fill {
-    display: flex;
-    flex-direction: column;
-  }
-  
+  overflow-y: auto;
+  max-height: 500px;
+}
+
+.flex-fill {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body {
+  flex-grow: 1;
+}
+
+.card-footer {
+  margin-top: auto;
+}
+
+.foto-perfil {
+  border-radius: 50%;
+}
+
+/* Responsive override */
+@media (max-width: 767px) {
   .card-body {
-    flex-grow: 1;
+    max-height: unset;
+    overflow-y: visible;
   }
-  
-  .card-footer {
-    margin-top: auto;
+
+  .d-flex.justify-content-between {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
-  
+
+  .card-footer button {
+    width: 100%;
+  }
+}

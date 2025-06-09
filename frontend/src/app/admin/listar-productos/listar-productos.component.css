@@ -1,33 +1,118 @@
-.mat-row {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-text-align: center;
+/* Wrapper con scroll horizontal para móviles */
+.tabla-responsive {
+  width: 100%;
+  overflow-x: auto;
 }
 
+/* Ajusta el ancho mínimo de las columnas */
+mat-header-cell, mat-cell {
+  min-width: 120px;
+  white-space: nowrap;
+}
+
+/* Botones responsive */
+button.mat-button {
+  background: navajowhite;
+  color: #080808;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  font-size: 0.9rem;
+  padding: 4px 10px;
+}
+
+button.mat-button:hover {
+  background-color: #d6e0ec;
+  transform: scale(1.05);
+}
+
+button.mat-button:active {
+  transform: scale(0.95);
+}
+
+/* Alternar colores de filas */
 .mat-row:nth-child(odd) {
   background: linear-gradient(to right, #f8f8f8, #4a394d2f);
 }
 
 .mat-row:nth-child(even) {
-  background: linear-gradient(to right,  #f8f8f8, #688da47f);
+  background: linear-gradient(to right, #f8f8f8, #688da47f);
 }
 
+/* Cabecera estilizada */
 .header {
-  font-size: 1.1em; /* Letras más grandes */
-  background: -webkit-linear-gradient(#d8cece32, #a4a9dd42);
-}
-button.mat-button {
-  background: navajowhite;/* Degradado de dos colores */
-  color: #080808; /* Color del texto */
-  border-radius: 10px; /* Sin borde */
-  cursor: pointer; /* Cambia el cursor a una mano */
-  transition: background-color 0.3s, transform 0.3s; /* Suaviza la transición del color y la transformación */
+  font-size: 1.1em;
+  background: linear-gradient(135deg, #d8cece32, #a4a9dd42);
+  text-align: center;
 }
 
-button.mat-button:hover {
-  background-color: #d6e0ec; /* Color de fondo al pasar el ratón */
-  transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el ratón */
+/* Centrar texto en celdas */
+.mat-row {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-align: center;
 }
 
-button.mat-button:active {
-  transform: scale(0.95); /* Reduce ligeramente el tamaño al hacer clic */
+.productos-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.producto-card {
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+}
+
+.producto-card:hover {
+  transform: scale(1.02);
+}
+
+.img-ajustada {
+  max-height: 180px;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Ocultar según el tamaño de pantalla */
+.solo-escritorio {
+  display: block;
+}
+
+.solo-movil {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .solo-escritorio {
+    display: none;
+  }
+
+  .solo-movil {
+    display: block;
+  }
+}
+@media (max-width: 768px) {
+  .productos-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+  }
+
+  .producto-card {
+    width: 90%;
+    max-width: 95vw;
+  }
+
+  .img-ajustada {
+    max-width: 100%;
+  }
+}
+mat-card-title, mat-card-subtitle {
+  text-align: center;
 }

@@ -16,7 +16,7 @@ import { Router }  from '@angular/router';
 export class HeaderAdminComponent implements OnInit{
   userLoginOn: boolean = false;
   userData?: usuario;
-  
+
   constructor(
     private loginService: LoginService,
     private changeDetectorRef: ChangeDetectorRef,
@@ -48,9 +48,9 @@ export class HeaderAdminComponent implements OnInit{
   logout(): void {
     this.loginService.logout();
     this.changeDetectorRef.detectChanges(); // Estoo me segura de que los cambios se detectan antes de navegar
-  this.router.navigate(['']).then(() => {
-    window.location.reload(); // 
-  });
+    this.router.navigate(['']).then(() => {
+      window.location.reload(); //
+    });
 
   }
 

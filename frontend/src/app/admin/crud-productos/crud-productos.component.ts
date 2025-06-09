@@ -20,9 +20,9 @@ export class CrudProductosComponent {
   imagenPrevisualizacion?: string | ArrayBuffer | null;
 
   constructor(
-      private dialog: MatDialog,
+    private dialog: MatDialog,
     private formBuilder: FormBuilder,
-     private http: HttpClient) {
+    private http: HttpClient) {
     this.productForm = this.formBuilder.group({
       name: ['', Validators.required],
       price: ['', Validators.required],
@@ -68,13 +68,6 @@ export class CrudProductosComponent {
       formData.append('category', this.productForm.get('category')?.value);
       formData.append('photo', this.selectedFile); // Añade el archivo seleccionado directamente
 
-      // Recuperar el token del almacenamiento (localStorage o sessionStorage)
-      const token = localStorage.getItem('token'); // Cambia esto si guardas el token de otra manera
-      const headers = {
-        Authorization: `Bearer ${token}`
-      };
-
-
       this.http.post<any>('https://hhreformas.es/api/products/create', formData).subscribe(
         response => {
           this.openConfirmModal('Confirmación de Creación', 'El producto ha sido creado exitosamente.', 'Ok');
@@ -89,8 +82,6 @@ export class CrudProductosComponent {
         }
       );
     } else {
-      console.log('Formulario inválido o archivo no seleccionado.');
-
       // Marcar los campos del formulario como inválidos posible opcion
     }
   }

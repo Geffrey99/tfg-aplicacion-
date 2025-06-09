@@ -11,12 +11,12 @@ import { ProductService } from '../../services/features/product.service';
 import { CartItem } from '../../interface/cart';
 
 @Component({
-    selector: 'app-detail',
-    standalone: true,
-    providers: [ProductService, PhotoProductService, CommonModule],
-    templateUrl: './detail.component.html',
-    styleUrl: './detail.component.css',
-    imports: [HttpClientModule, CommonModule, HeaderComponent]
+  selector: 'app-detail',
+  standalone: true,
+  providers: [ProductService, PhotoProductService, CommonModule],
+  templateUrl: './detail.component.html',
+  styleUrl: './detail.component.css',
+  imports: [HttpClientModule, CommonModule, HeaderComponent]
 })
 
 export class DetailComponent implements OnInit {
@@ -39,8 +39,8 @@ export class DetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.productId = id ? +id : 0;
 
-      // Desplazarse hacia arriba
-      this.viewportScroller.scrollToPosition([0, 0]);
+    // Desplazarse hacia arriba
+    this.viewportScroller.scrollToPosition([0, 0]);
 
 
     // Cargar el producto correspondiente al ID
@@ -58,7 +58,7 @@ export class DetailComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = Number(routeParams.get('productId'));
 
-  // Encuentra el producto que corresponde con el id proporcionado en ruta.
+    // Encuentra el producto que corresponde con el id proporcionado en ruta.
     this.product = this.products.find(product => product.id === productIdFromRoute);
   }
 

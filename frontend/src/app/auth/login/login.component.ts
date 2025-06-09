@@ -13,7 +13,7 @@ import { ClientComponent } from '../../client/client.component';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule, ClientComponent],
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -27,10 +27,10 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private loginservice: LoginService, private router: Router) {}
 
   ngOnInit(): void {}
-//para entrar en admin
+
   loginForm = this.formBuilder.group({
-    email: ['zambran@gmail.com', [Validators.required, Validators.email]],
-    password: ['111@', Validators.required]
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required]
   });
 
   registerForm = this.formBuilder.group({
@@ -53,9 +53,6 @@ export class LoginComponent implements OnInit {
       this.loginservice.login(this.loginForm.value as LoginRequest).subscribe({
         next: (response) => {
           const userData = response.usuario;
-          const token = response.token; // Verifica que el token esté llegando.
-          localStorage.setItem('authToken', token); // Guarda el token en el almacenamiento local.
-
           const userRole = userData.rol; //  el rol viene dentro del objeto usuario
           console.log('LoginComponent - Data received:', userData);
 

@@ -17,101 +17,101 @@ import { ModalConfirmacionComponent} from '../modal-confirmacion/modal-confirmac
 })
 export class EditarProductosComponent implements OnInit{
 
-editForm!: FormGroup;
-productId!:number;
-categories = [
-  { id: 1, name: 'Móviles' },
-  { id: 2, name: 'Portátiles' },
-  { id: 3, name: 'Accesorios' }
-  // ... se puede agregar más categorías aquí
-];
+  editForm!: FormGroup;
+  productId!:number;
+  categories = [
+    { id: 1, name: 'Móviles' },
+    { id: 2, name: 'Portátiles' },
+    { id: 3, name: 'Accesorios' }
+    // ... puedes agregar más categorías aquí
+  ];
 
-private imageBaseUrl = 'https://hhreformas.es/api/product-images/';
+  private imageBaseUrl = 'https://hhreformas.es/api/product-images/';
 
-selectedFile: File | null = null;
+  selectedFile: File | null = null;
 
-constructor(
-private productService: ProductService,
-private route: ActivatedRoute,
-private router: Router,
-private fb: FormBuilder,
-private dialog: MatDialog
-) {} // Added closing parenthesis for the constructor
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private fb: FormBuilder,
+    private dialog: MatDialog
+  ) {} // Added closing parenthesis for the constructor
 
-ngOnInit(): void {
-  this.productId = this.route.snapshot.params['id'];
-  this.editForm = this.fb.group({
-    name: ['', Validators.required],
-    description: ['', Validators.required],
-    price: ['', [Validators.required, Validators.min(1.01)]],
-    stock: ['', [Validators.required, Validators.min(1)]],
-    photoPath: [''],
-    category: this.fb.group({
-      id: ['', Validators.required] // Aseegura de que 'id' sea un campo dentro de un FormGroup para 'category' Okkk
-    }),
-  });
+  ngOnInit(): void {
+    this.productId = this.route.snapshot.params['id'];
+    this.editForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['', [Validators.required, Validators.min(1.01)]],
+      stock: ['', [Validators.required, Validators.min(1)]],
+      photoPath: [''],
+      category: this.fb.group({
+        id: ['', Validators.required] // Asegúrate de que 'id' sea un campo dentro de un FormGroup para 'category'
+      }),
+    });
 
-  this.productService.getProductById(this.productId).subscribe(product => {
-    this.editForm.patchValue({
-      name: product.name,
-      description: product.description,
-      price: product.price,
-      stock: product.stock,
-      photoPath: product.photoPath,
-      category: {
-        id: product?.category?.id // Asegúrate de que esto coincida con la estructura del FormGroup
+    this.productService.getProductById(this.productId).subscribe(product => {
+      this.editForm.patchValue({
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        stock: product.stock,
+        photoPath: product.photoPath,
+        category: {
+          id: product?.category?.id // Asegúrate de que esto coincida con la estructura del FormGroup
+        }
+      });
+    });
+  }
+
+  onSubmit(): void {
+    if (this.editForm.valid) {
+      const formData = new FormData();
+      formData.append('name', this.editForm.value.name);
+      formData.append('description', this.editForm.value.description);
+      formData.append('price', this.editForm.value.price.toString()); // Convertir a string si es necesario
+      formData.append('stock', this.editForm.value.stock.toString()); // Convertir a string si es necesario
+      formData.append('categoryId', this.editForm.value.category.id); // Enviar solo el ID de la categoría
+
+      if (this.selectedFile) {
+        formData.append('photo', this.selectedFile);
+      }
+
+      this.productService.updateProduct(this.productId, formData).subscribe(() => {
+        this.openConfirmModal('Confirmación de Actualización', 'El producto ha sido actualizado exitosamente ✔️ ', 'Aceptar');
+        this.router.navigate(['admin/listaProductos']);
+      }, error => {
+        console.error('Error al actualizar el producto:', error);
+      });
+    }
+  }
+
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      // Simplemente guarda el archivo en la propiedad selectedFile
+      this.selectedFile = file;
+    }
+  }
+
+
+
+  getFullImageUrl(photoUrl: string): string {
+    return photoUrl ? `${this.imageBaseUrl}${photoUrl}` : 'assets/okOk.svg';
+  }
+
+
+  openConfirmModal(title: string, message: string, buttonText: string): void {
+    this.dialog.open(ModalConfirmacionComponent, {
+      data: {
+        title: title,
+        message: message,
+        buttonText: buttonText
       }
     });
-  });
-}
-
-onSubmit(): void {
-  if (this.editForm.valid) {
-    const formData = new FormData();
-    formData.append('name', this.editForm.value.name);
-    formData.append('description', this.editForm.value.description);
-    formData.append('price', this.editForm.value.price.toString()); // Convertir a string si es necesario
-    formData.append('stock', this.editForm.value.stock.toString()); // Convertir a string si es necesario
-    formData.append('categoryId', this.editForm.value.category.id); // Enviar solo el ID de la categoría
-
-    if (this.selectedFile) {
-      formData.append('photo', this.selectedFile);
-    }
-
-    this.productService.updateProduct(this.productId, formData).subscribe(() => {
-      this.openConfirmModal('Confirmación de Actualización', 'El producto ha sido actualizado exitosamente ✔️ ', 'Aceptar');
-      this.router.navigate(['admin/listaProductos']);
-    }, error => {
-      console.error('Error al actualizar el producto:', error);
-    });
   }
-}
-
-
-onFileSelected(event: any) {
-  const file = event.target.files[0];
-  if (file) {
-    // Simplemente guarda el archivo en la propiedad selectedFile
-    this.selectedFile = file;
-  }
-}
-
-
-
-getFullImageUrl(photoUrl: string): string {
-  return photoUrl ? `${this.imageBaseUrl}${photoUrl}` : 'assets/okOk.svg';
-}
-
-
-openConfirmModal(title: string, message: string, buttonText: string): void {
-  this.dialog.open(ModalConfirmacionComponent, {
-    data: {
-      title: title,
-      message: message,
-      buttonText: buttonText
-    }
-  });
-}
 
 // onUpdateProduct(): void {
 //   // Lógica para actualizar el producto...

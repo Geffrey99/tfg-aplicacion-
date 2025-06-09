@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectChange } from '@angular/material/select';
 
 import { ProductService } from '../../services/features/product.service';
 import { Product } from '../../interface/producto';
@@ -10,7 +14,7 @@ import { Product } from '../../interface/producto';
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, RouterModule, NgxPaginationModule],
+  imports: [CommonModule, HttpClientModule, RouterModule, NgxPaginationModule,MatFormFieldModule, MatSelectModule, MatInputModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -65,9 +69,8 @@ export class ProductComponent implements OnInit {
     this.applyFilters();
   }
 
-  onSortChanged(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    this.currentSort = selectElement.value;
+  onSortChanged(event: MatSelectChange) {
+    this.currentSort = event.value;
     this.applyFilters();
   }
   getFullImageUrl(photoUrl: string): string {
@@ -82,9 +85,9 @@ export class ProductComponent implements OnInit {
 
 }
 
-  // getFullImageUrl(photoUrl: string): string {
-  //   return `${this.imageBaseUrl}${photoUrl}`;
-  // }
+// getFullImageUrl(photoUrl: string): string {
+//   return `${this.imageBaseUrl}${photoUrl}`;
+// }
 
 
 

@@ -1,92 +1,191 @@
-/* Estilos para el formulario de creación de productos */
+/* General fix para todos los elementos del form */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* 💡 Asegura que todas las cajas respeten su tamaño */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 🧱 Container mejorado con ajuste completo y responsive */
 .container {
-  background-color: #fff;
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+  background: linear-gradient(to bottom right, #fefefe, #f5f5f5);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-top: 6px solid #9198e5;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+/* 🧠 Evita que .row cree margen negativo con padding del container */
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* 🔄 Columna adaptable para móvil */
+.col-md-6 {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* 📱 Responsive inputs/selects */
+.form-control,
+.form-select {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px;
+  font-size: 16px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+}
+
+/* 🎯 Ajuste del botón */
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  background-color: #FF6B00;
+  border: none;
+  border-radius: 8px;
   margin-top: 20px;
 }
 
-/* Título del formulario */
+/* 🔍 Ajuste de imagen */
+.img-preview {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-top: 10px;
+}
+
+
+
+/* Fondo degradado sutil interior */
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ff6b00 0%, #9198e5 100%);
+  opacity: 0.05;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Elementos dentro del contenedor por encima del fondo */
+.container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Título */
 h2 {
-  color: #0056b3;
+  color: #FF6B00;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: 28px;
 }
 
-/* Estilo de los grupos de formulario */
-.form-group {
-  margin-bottom: 15px;
-}
-
-/* Estilo de las etiquetas */
+/* Etiquetas */
 .form-label {
-  display: block;
   font-weight: 600;
   color: #333;
+  margin-bottom: 5px;
 }
 
-/* Estilo de los campos de entrada y área de texto */
-.form-control {
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  padding: 10px;
+/* Inputs y selects */
+.form-control,
+.form-select {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
   font-size: 16px;
+  width: 100%;
+  transition: border-color 0.3s;
 }
 
-/* Estilo del botón de envío */
+.form-control:focus,
+.form-select:focus {
+  border-color: #FF6B00;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2);
+}
+
+/* Botón */
 .btn-primary {
-  background-color: #0056b3;
+  background-color: #FF6B00;
   border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+  padding: 12px;
+  border-radius: 8px;
   color: white;
   font-size: 18px;
   cursor: pointer;
-  display: block;
   width: 100%;
   margin-top: 20px;
+  transition: background-color 0.3s;
 }
 
 .btn-primary:hover {
-  background-color: #004494;
+  background-color: #e65c00;
 }
 
-/* Estilo de la retroalimentación de validación */
+/* Feedback de errores */
 .invalid-feedback {
-  color: #e38790;
-  font-size: 14px;
-}
-.needs-validation .form-control:invalid {
-  border-color: #df5361;
+  color: #d9534f;
+  font-size: 13px;
+  margin-top: 4px;
 }
 
-.needs-validation .form-control:invalid ~ .invalid-feedback {
+.needs-validation .form-control:invalid,
+.needs-validation .form-select:invalid {
+  border-color: #dc3545;
+}
+
+.needs-validation .form-control:invalid ~ .invalid-feedback,
+.needs-validation .form-select:invalid ~ .invalid-feedback {
   display: block;
 }
 
-/* Estilo de la previsualización de la imagen */
+/* Imagen */
 .img-preview {
   display: block;
   margin-top: 10px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo del selector de categoría */
-.form-select {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: 1px solid #ced4da;
-}
-
-/* Ajustes para dispositivos móviles */
+/* 🔧 Media query adicional por si acaso */
 @media (max-width: 768px) {
   .container {
-    margin: 10px;
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .form-control, .form-select {
+    font-size: 15px;
     padding: 10px;
+  }
+
+  .btn-primary {
+    font-size: 16px;
   }
 }

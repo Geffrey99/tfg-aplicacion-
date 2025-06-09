@@ -1,40 +1,53 @@
-<!-- Angular Material Table para mostrar usuarios -->
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<!-- Tabla tradicional solo visible en escritorio -->
+<div class="tabla-responsive solo-escritorio">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!-- Columna de Foto -->
+    <!-- Correo con foto -->
     <ng-container matColumnDef="foto">
-      <mat-header-cell  *matHeaderCellDef> Correo </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
       <mat-cell *matCellDef="let usuario">
         <img src="assets/img/ICON.png" alt="Foto de perfil" class="foto-perfil"> &nbsp;
-        {{usuario.email}}
+        {{ usuario.email }}
       </mat-cell>
     </ng-container>
-  
-    <!-- Columnas de Nombre y Apellido -->
+
     <ng-container matColumnDef="nombre">
-      <mat-header-cell  *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
       <mat-cell *matCellDef="let usuario"> {{ usuario.nombre }} </mat-cell>
     </ng-container>
-  
+
     <ng-container matColumnDef="apellido">
-      <mat-header-cell  *matHeaderCellDef> Apellido </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
       <mat-cell *matCellDef="let usuario"> {{ usuario.apellido }} </mat-cell>
     </ng-container>
-  
-    <!-- Columna de Acciones -->
+
     <ng-container matColumnDef="Informacion">
-      <mat-header-cell  *matHeaderCellDef> +Informacion </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> +Información </mat-header-cell>
       <mat-cell *matCellDef="let usuario">
         <button mat-button class="mat-button" (click)="verOrdenesDeUsuario(usuario.id)">Consultar</button>
-        <!-- <button mat-button color="primary" class="text-success" (click)="verOrdenesDeUsuario(usuario.id)">Consultar</button> -->
       </mat-cell>
     </ng-container>
-  
-    <mat-header-row class="header" *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row class="mat-row" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns" class="header"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-row"></mat-row>
   </mat-table>
-  
-  <!-- Paginación -->
-  <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
-  
- 
+</div>
+
+<!-- Tarjetas para móvil -->
+<div class="usuarios-container solo-movil">
+  <mat-card class="usuario-card" *ngFor="let usuario of dataSource.data">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <img src="assets/img/ICON.png" alt="Foto de perfil" class="foto-perfil">
+      </div>
+      <mat-card-title>{{ usuario.nombre }} {{ usuario.apellido }}</mat-card-title>
+      <mat-card-subtitle>{{ usuario.email }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-actions>
+      <button mat-button class="mat-button" (click)="verOrdenesDeUsuario(usuario.id)">Consultar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>

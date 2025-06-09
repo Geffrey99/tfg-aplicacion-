@@ -1,49 +1,51 @@
 <div class="filters-search-container">
-    <div class="filters">
-      <select (change)="onSortChanged($event)">
-        <option value="invalid" selected>Filtrar por precio...</option>
-        <option value="asc">Más barato a más caro</option>
-        <option value="desc">Más caro a más barato</option>
-      </select>
-    </div>
-  
-    <div class="search">
-      <input type="text" (input)="onSearch($event)" placeholder="Buscar por nombre...">
-    </div>
-  </div>       
+  <mat-form-field appearance="outline" class="filters">
+    <mat-label>Filtrar por precio</mat-label>
+    <mat-select (selectionChange)="onSortChanged($event)">
+      <mat-option value="invalid" selected>Filtrar por precio...</mat-option>
+      <mat-option value="asc">Más barato a más caro</mat-option>
+      <mat-option value="desc">Más caro a más barato</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="search">
+    <mat-label>Buscar por nombre</mat-label>
+    <input matInput (input)="onSearch($event)" placeholder="Ej. auriculares" />
+  </mat-form-field>
+</div>
 
 
 <section class="py-2">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-        <!-- Aquí comienza el bucle para mostrar los productos -->
-        <div *ngIf="filteredProducts.length === 0" class="alert alert-info text-center" role="alert">
-          Aún no contamos con ese producto...
-          <img src="assets/spinner.svg" alt="Cargando..." width="170px"/>
-        </div>
-     
-        <div class="col mb-5" *ngFor="let product of filteredProducts | paginate: { itemsPerPage: 12, currentPage: p }">
-          <div class="card h-100">
-            <!-- Product image-->
-            <img class="card-img-top" [src]="product.photoUrl ? getFullImageUrl(product.photoUrl) : 'assets/okOk.svg'" [alt]="product.name" />
-            <!-- Product details-->
-            <div class="card-body p-4">
-              <div class="text-center">
-                <!-- Product name-->
-                <h5 class="fw-bolder">{{ product.name }}</h5>
-                <!-- Product price-->
-                {{ product.price }} €
-              </div>
-            </div>
-            <!-- Product actions-->
-            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-              <div class="text-center"><a class="btn btn-outline-dark mt-auto" [routerLink]="['/app-user/product', product.id]">Ver opciones</a></div>
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+      <!-- Aquí comienza el bucle para mostrar los productos -->
+      <div *ngIf="filteredProducts.length === 0" class="alert alert-info text-center" role="alert">
+        Aún no contamos con ese producto...
+        <img src="assets/spinner.svg" alt="Cargando..." width="170px"/>
+      </div>
+
+      <div class="col mb-5" *ngFor="let product of filteredProducts | paginate: { itemsPerPage: 12, currentPage: p }">
+        <div class="card h-100">
+          <!-- Product image-->
+          <img class="card-img-top" [src]="product.photoUrl ? getFullImageUrl(product.photoUrl) : 'assets/okOk.svg'" [alt]="product.name" />
+          <!-- Product details-->
+          <div class="card-body p-4">
+            <div class="text-center">
+              <!-- Product name-->
+              <h5 class="fw-bolder">{{ product.name }}</h5>
+              <!-- Product price-->
+              {{ product.price }} €
             </div>
           </div>
+          <!-- Product actions-->
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center"><a class="btn btn-outline-dark mt-auto" [routerLink]="['/app-user/product', product.id]">Ver opciones</a></div>
+          </div>
         </div>
-        <!-- Aquí termina el bucle -->
       </div>
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <!-- Aquí termina el bucle -->
     </div>
-  </section>
-  
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</section>
+

@@ -7,12 +7,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
 
 
 @Component({
   selector: 'crud-clientes',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatListModule, MatPaginator],
+  imports: [CommonModule, MatTableModule, MatListModule, MatPaginator, MatCardModule],
   templateUrl: './crud-clientes.component.html',
   styleUrl: './crud-clientes.component.css'
 })
@@ -28,13 +29,13 @@ export class CrudClientesComponent implements OnInit {
     private usuarioService: UsuarioService,
     private orderService: OrderService,
     private router: Router,
-  
+
   ) {}
 
   ngOnInit(): void {
     this.usuarioService.obtenerTodosLosUsuarios().subscribe({
       next: (data) => {
-        this.dataSource.data = data; 
+        this.dataSource.data = data;
       },
       error: (e) => console.error(e)
     });
@@ -43,9 +44,9 @@ export class CrudClientesComponent implements OnInit {
 
 
 
-verOrdenesDeUsuario(userId: number): void {
-  this.router.navigate(['admin/datos-cliente', userId]);
-}
+  verOrdenesDeUsuario(userId: number): void {
+    this.router.navigate(['admin/datos-cliente', userId]);
+  }
 
 
   // verOrdenesDeUsuario(userId: number): void {
