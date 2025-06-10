@@ -15,10 +15,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {
+
     @Autowired
     private CategoryRepository categoryRepository;
-   
-    
 
     @GetMapping
     public ResponseEntity<List<Category>> getAllCategories() {

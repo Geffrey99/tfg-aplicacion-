@@ -1,7 +1,7 @@
 package com.webG.controller;
 
 import com.webG.entity.Category;
-
+//**Abstracción de la entidad de base de datos (`Category`)
 public class CategoryDTO {
 	
 	private Long id;
@@ -20,7 +20,6 @@ public class CategoryDTO {
 		this.id = id;
 		this.name = name;
 	}
-
 
 
 	public Long getId() {

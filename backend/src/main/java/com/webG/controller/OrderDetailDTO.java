@@ -1,8 +1,10 @@
 package com.webG.controller;
 public class OrderDetailDTO {
-    private Long productId;
+
+	private Long productId;
     private int cantidad;
     private double precio;
+
 	public OrderDetailDTO(Long productId, int cantidad, double precio) {
 		super();
 		this.productId = productId;

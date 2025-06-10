@@ -2,7 +2,8 @@ package com.webG.controller;
 
 
 public class OrderDetailConProductDTO {
-    private Long orderDetailId;
+
+	private Long orderDetailId;
     private Long productId;
     private String productName;
     private String productDescription;

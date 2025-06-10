@@ -29,7 +29,7 @@ public class AuthController {
             Map<String, Object> response = new HashMap<>();
             response.put("usuario", authenticatedUser);
             response.put("token", token);
-            response.put("message", "OK, has pasado el login"); // Mensaje de todo Okkkk
+            response.put("message", "OK, has pasado el login"); // Mensaje de todo Okkkkk
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(

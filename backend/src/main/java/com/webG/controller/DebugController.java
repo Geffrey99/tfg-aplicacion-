@@ -16,7 +16,6 @@ public class DebugController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("Usuario autenticado: " + SecurityContextHolder.getContext().getAuthentication());
         return ResponseEntity.ok(auth.getAuthorities());
-
     }
-
 }
+//Comprobacion deeebud user autenticado - controller okkk

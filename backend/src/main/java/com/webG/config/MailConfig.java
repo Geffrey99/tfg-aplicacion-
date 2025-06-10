@@ -7,7 +7,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @Configuration
 public class MailConfig {
-//TODO --- NO IMPLEMENTADO - PERO CON INTENCION
+    //TODO --- NO IMPLEMENTADO-- para enviar correo al user - Ok
     @Bean
     public JavaMailSender javaMailSender() {
         return new JavaMailSenderImpl();

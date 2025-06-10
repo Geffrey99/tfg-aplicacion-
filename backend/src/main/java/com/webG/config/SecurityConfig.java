@@ -26,21 +26,20 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    //TODO //Permitir por roles ADMIN O USER PERO MUCHAS RUTAS...Y ME DA MUCHO PROBLEMA--
-    //TODO SE HARA CON TIEMPO
+    //TODO - se podrian hacer mejorar / permisos de rutas /Admi/User/NoRegistrado Ok---
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Desactiva CSRF si no es necesario
-                .cors(cors -> {}) // Configura CORS (si es necesario)
+                .csrf(csrf -> csrf.disable()) //
+                .cors(cors -> {}) //
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Sin estado para las conexiones
                 )
                 .authorizeHttpRequests(auth ->
                         auth.anyRequest().permitAll() // Permite todas las solicitudes sin autenticación
                 )
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Si necesitas JWT (podrías quitarlo).
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

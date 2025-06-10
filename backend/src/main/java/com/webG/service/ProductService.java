@@ -25,8 +25,6 @@ public class ProductService {
     public Product getProductById(Long id) {
         return productRepository.findById(id).orElse(null);
     }
-    
-    
 
 
     public List<Product> getProductsByCategory(Category category) {
@@ -38,15 +36,15 @@ public class ProductService {
     }
 
 
- //   public Product saveProduct(Product product, MultipartFile photo) throws IOException {
-        // Asignar la foto al producto si se proporciona
-   //     if (photo != null && !photo.isEmpty()) {
-     //       product.setPhotoPath(photo.getBytes());
-      //  }
+    //   public Product saveProduct(Product product, MultipartFile photo) throws IOException {
+    // Asignar la foto al producto si se proporciona
+    //     if (photo != null && !photo.isEmpty()) {
+    //       product.setPhotoPath(photo.getBytes());
+    //  }
 
-        // Guardar el producto en la base de datos
-       // return productRepository.save(product);
+    // Guardar el producto en la base de datos
+    // return productRepository.save(product);
     //}
 
-    // Otros métodos del servicio según tus necesidades, como actualizar o eliminar productos.
+    // Otros métodos del servicio según necesidades
 }

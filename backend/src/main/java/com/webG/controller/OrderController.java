@@ -24,9 +24,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/orders")
 public class OrderController {
 
-  //  @Autowired
-   // private OrderService orderService;
-
     @Autowired
     private UsuarioRepository usuarioRepository;
 

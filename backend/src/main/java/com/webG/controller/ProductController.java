@@ -121,9 +121,8 @@ import jakarta.transaction.Transactional;
 
 
     
-// Ruta donde se guardarán las imágenes
-    
-    
+    // Ruta donde se guardarán las imágenes
+
     @PostMapping("/create")
     public ResponseEntity<?> createProduct( @ModelAttribute Product product, BindingResult bindingResult,@RequestParam("photo") MultipartFile photo) throws IOException {
         // Validar los datos del producto

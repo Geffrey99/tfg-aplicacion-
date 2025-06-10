@@ -42,4 +42,4 @@ public class LocalidadProvinciaController {
 	        }
 	        return new ResponseEntity<>(localidades, HttpStatus.OK);
 	    }
-}
+} //Ok controlador de mis Localidades/provincias

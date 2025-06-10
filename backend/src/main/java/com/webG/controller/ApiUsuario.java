@@ -38,14 +38,8 @@ public class ApiUsuario {
     private LocalidadRepository localidadRepository;
     @Autowired
     private JavaMailSender mailSender;
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    //TODO ME DA ERROR POR AHORA NO ME FUNCIONA
-   // @Autowired
- //   private BCryptPasswordEncoder bCryptPasswordEncoder;
-    
     @Autowired
     private OrderRepository orderRepository;
     @Autowired 
@@ -83,15 +77,15 @@ public class ApiUsuario {
         // Guarda el nuevo usuario
         try {
             Usuario nuevoUsuario = usuarioRepository.save(usuario);
-            // No incluyas la contraseña en la respuesta
+            // No se incluye la contraseña en la respuesta -- Ok
             nuevoUsuario.setPassword(null);
 
-            //  /TODO NO ME FUNCIONA -EnvíaR el correo electrónico
-       //     SimpleMailMessage mailMessage = new SimpleMailMessage();
-         //   mailMessage.setTo(usuario.getEmail());
-          //  mailMessage.setSubject("Bienvenido a Nuestra Aplicación");
-           // mailMessage.setText("Hola " + usuario.getNombre() + ",\n\nTu registro se ha completado con éxito.\n\nSaludos,\nEl Equipo de la Aplicación");
-           // mailSender.send(mailMessage);
+            //TODO -NO ME FUNCIONA- NO IMPLEMENTADO
+            //  SimpleMailMessage mailMessage = new SimpleMailMessage();
+            //  mailMessage.setTo(usuario.getEmail());
+            //  mailMessage.setSubject("Bienvenido a Nuestra Aplicación");
+            // mailMessage.setText("Hola " + usuario.getNombre() + ",\n\nTu registro se ha completado con éxito.\n\nSaludos,\nEl Equipo de la Aplicación");
+            // mailSender.send(mailMessage);
 
             return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
         } catch (Exception e) {

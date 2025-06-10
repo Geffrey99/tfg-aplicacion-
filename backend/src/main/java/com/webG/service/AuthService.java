@@ -31,7 +31,7 @@ public class AuthService {
     // Cargar la clave secreta desde application.properties
     @Value("${jwt.secret}")
     private String secretKey;
-// Clave secreta fija
+    // Clave secreta fija
 
     /**
      * Método para autenticar al usuario por email y contraseña.
@@ -44,13 +44,13 @@ public class AuthService {
         }
         return null; // Credenciales incorrectas
     }
+
     /**
      * Método para generar un token JWT que incluye el rol del usuario.
      */
     public String generateToken(Usuario usuario) {
         // Convertir la clave cargada desde application.properties en un SecretKey válido
-        SecretKey signingKey = new SecretKeySpec(
-                Base64.getEncoder().encode(secretKey.getBytes()), // Convertir la clave en Base64
+        SecretKey signingKey = new SecretKeySpec(Base64.getEncoder().encode(secretKey.getBytes()), // Convertir la clave en Base64
                 SignatureAlgorithm.HS256.getJcaName() // Algoritmo HS256 o el que uses (HS384, etc.)
 
         );
@@ -58,8 +58,7 @@ public class AuthService {
 
         // Crear el token JWT con el rol incluido en el payload
         long tiempoExpiracion = 1000 * 60 * 60; // 1 hora
-        return Jwts.builder()
-                .setSubject(usuario.getEmail()) // Email del usuario
+        return Jwts.builder().setSubject(usuario.getEmail()) // Email del usuario
                 .claim("rol", usuario.getRol()) // Agregar el rol del usuario al payload Esto asegura que el rol (`Admin`, `User`, etc.) estará disponible en el token para validaciones futuras.
                 .setIssuedAt(new Date(System.currentTimeMillis())) // Fecha de emisión
                 .setExpiration(new Date(System.currentTimeMillis() + tiempoExpiracion)) // Fecha de expiración

@@ -8,8 +8,7 @@ public class ProductDTO {
     private String description;
     private int stock;
     private CategoryDTO category; 
-    
-    
+
 	public ProductDTO(Long id, String name, double price, String photoUrl, String description, int stock, CategoryDTO category) {
 		super();
 		this.id = id;
